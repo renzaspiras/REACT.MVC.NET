@@ -29,28 +29,35 @@ This Python script automates the creation of a .NET MVC project alongside a Vite
      - Create a `Vite React` project named `projectname.REACT`.
      - Generate a `build.py` script for building and running the projects.
 
-## Project Structure
+## How It Works
 
-Upon successful execution, the script will create the following directory structure:
+The `REACT.MVC.NET.py` script automates the following tasks:
 
-```
-projectname.MVC/
-│   projectname.MVC.csproj
-│   Program.cs
-│   ...
-│
-projectname.REACT/
-│   node_modules/
-│   public/
-│   src/
-│   ...
-│
-build.py
-```
+### 1. .NET MVC Project Creation
+
+- **Project Initialization**: Uses `dotnet new mvc` command to create a .NET MVC project named `projectname.MVC`.
+
+- **Solution File**: Creates a solution file (`projectname.MVC.sln`) and adds the MVC project to it using `dotnet new sln` and `dotnet sln add` commands.
+
+- **File Management**: Removes unnecessary `Program.cs` and `wwwroot` directory if it exists, then recreates `wwwroot` to prepare for the React build.
+
+### 2. Vite React Project Creation
+
+- **Project Initialization**: Uses `npm init vite@latest` command to create a Vite React project named `projectname.REACT` with the React template.
+
+- **Dependencies Installation**: Installs necessary dependencies and builds the Vite React project using `npm install` and `npm run build`.
+
+- **Build Integration**: Copies the built React project (`dist` directory) into the `.NET MVC` project's `wwwroot` directory.
+
+### 3. `build.py` Script Generation
+
+- **Python Script**: Generates a `build.py` script that automates the build and deployment process of both projects.
+
+- **Build Automation**: Provides functions to change directory, build the Vite React project, and copy the build output to the `.NET MVC` project's `wwwroot`.
 
 ## Using `build.py`
 
-The `build.py` script is generated to assist with building and running the projects. Here’s how to use it:
+The `build.py` script facilitates building and running both projects (`projectname.MVC` and `projectname.REACT`):
 
 1. **Navigate to Project Directory**: Open a terminal and navigate to the directory containing `build.py`.
 
@@ -60,7 +67,10 @@ The `build.py` script is generated to assist with building and running the proje
    python build.py
    ```
 
-3. **Follow the Instructions**: The script will guide you through building and running both projects (`projectname.MVC` and `projectname.REACT`).
+3. **Automated Tasks**: The script automates:
+   - Changing directory to the React project (`projectname.REACT`).
+   - Building the Vite React project.
+   - Copying the built React files (`dist` directory) to the `.NET MVC` project's `wwwroot` directory.
 
 ## Additional Notes
 
@@ -70,4 +80,4 @@ The `build.py` script is generated to assist with building and running the proje
 
 ---
 
-This README provides a comprehensive guide on using `REACT.MVC.NET.py` to generate and manage your .NET MVC and Vite React projects. Ensure all prerequisites are met and follow the outlined steps for seamless project creation and execution. Adjustments can be made based on specific project requirements or preferences.
+This README provides a comprehensive guide on using `REACT.MVC.NET.py` to automate the creation and integration of a .NET MVC project with a Vite React project. Ensure all prerequisites are met and follow the outlined steps for seamless project creation, integration, and deployment. Adjustments can be made based on specific project requirements or preferences.
